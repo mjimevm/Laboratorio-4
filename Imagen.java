@@ -1,11 +1,36 @@
 import java.util.ArrayList;
 
-public class Imagen extends Contenido {
+public class Imagen extends Contenido implements Publicable {
     private String resolucion;
+    private boolean publicado;
 
     public Imagen(String nombre, String descripcion, ArrayList<String> etiquetas, String categoria, String resolucion) {
         super(nombre, descripcion, etiquetas, categoria);
         this.resolucion = resolucion;
+        this.publicado = false;
+    }
+
+    @Override
+    public boolean publicar() {
+        if (!publicado) {
+            publicado = true;
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean despublicar() {
+        if (publicado) {
+            publicado = false;
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean estaPublicado() {
+        return publicado;
     }
 
     public String getResolucion() {

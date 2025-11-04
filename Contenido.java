@@ -24,7 +24,20 @@ public abstract class Contenido {
     public String getCategoria() {
         return categoria;
     }
-   
+    // Setters
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    public void setEtiquetas(ArrayList<String> etiquetas) {
+        this.etiquetas = etiquetas;
+    }
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+    
     @Override 
     public String toString() {
         return "CONTENIDO: [Nombre: " +nombre+ ", Descripción: " + descripcion + ", etiquetas: " + etiquetas + ", Categoría: " + categoria;

@@ -155,10 +155,56 @@ public class Main {
                                             }
                                             break;
                                         case 2:
-                                            // Lógica para editar contenido
+System.out.println("\nEDITAR CONTENIDO");
+                                            System.out.println("Elija el índice del contenido que quiere modificar");
+                                            int i = 0;
+                                            for (Contenido c : controlador.getMultimedia()) {
+                                                System.out.println( i + " -> " + c.getNombre());
+                                                i++;
+                                            }
+                                            if (i == 0) {
+                                                System.out.println("No hay contenidos para editar.");
+                                                break;
+                                            }
+                                            System.out.print("\nSeleccione una opción (índice): ");
+                                            int editarOpcion = teclado.nextInt();
+                                            if (editarOpcion >= 0 && editarOpcion < controlador.getMultimedia().size()) {
+                                                Contenido c = controlador.getMultimedia().get(editarOpcion);
+                                                System.out.println("¿Qué quiere modificar?");
+                                                System.out.println("1. Nombre");
+                                                System.out.println("2. Descripción");
+                                                System.out.println("3. Agregar etiqueta");
+                                                System.out.println("4. Categoría");
+                                                System.out.print("Seleccione una opcion: ");
+                                                int opcionEditar = teclado.nextInt();
+                                                teclado.nextLine(); // linea de salto
+                                                System.out.print("Ingrese la modificación: ");
+                                                String modificacion = teclado.nextLine();
+                                                controlador.editarContenido(c, opcionEditar, modificacion);
+                                            } else {
+                                                System.out.println("Índice inválido. Contenido no encontrado.");
+                                                break;
+                                            }
                                             break;
                                         case 3:
-                                            // Lógica para eliminar contenido
+                                            if (controlador.getMultimedia().isEmpty()) {
+                                                System.out.println("No hay contenidos para eliminar.");
+                                                break;
+                                            }
+                                            System.out.println("\nELIMINAR CONTENIDO");
+                                            int idx = 0;
+                                            for (Contenido c : controlador.getMultimedia()) {
+                                                System.out.println(idx + " -> " + c.getNombre());
+                                                idx++;
+                                            }
+                                            System.out.print("Seleccione índice a eliminar: ");
+                                            int eliminarIdx = teclado.nextInt();
+                                            if (eliminarIdx >= 0 && eliminarIdx < controlador.getMultimedia().size()) {
+                                                String mensaje = controlador.eliminarContenido(eliminarIdx);
+                                                System.out.println(mensaje);
+                                            } else {
+                                                System.out.println("Índice inválido...");
+                                            }
                                             break;
                                         case 4:
                                             // Lógica para publicar contenido
@@ -188,7 +234,7 @@ public class Main {
                         System.out.println("Usuario no encontrado. Por favor, regístrese.");
                     }
                     break;
-
+                    
                 // Registrarse
                 case 2:
                     System.out.print("Ingrese un nuevo nombre de usuario: ");
@@ -196,6 +242,8 @@ public class Main {
                     for (Usuario u : controlador.getUsuarios()) {
                         if (u.getUsername().equals(newUsuario)) {
                             System.out.println("El nombre de usuario ya existe. Intente con otro.");
+                            System.out.print("Ingrese un nuevo nombre de usuario: ");
+                            newUsuario = teclado.next();
                             break;
                         }
                     }
