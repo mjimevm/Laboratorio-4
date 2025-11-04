@@ -1,3 +1,11 @@
+// Universidad del Valle de Guatemala
+// Programación Orientada a Objetos
+// Jimena Vásquez - 25092
+// Alejandro Sagastume - 25257
+
+// Laboratorio 4
+
+
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Main {
@@ -9,12 +17,13 @@ public class Main {
         boolean salir = false;
 
         while (key == 0) {
+            // Menú Principal
             System.out.println("\n--- Bienvenido a Estudio de Grabación Audiovisual (EGA) ---");
             System.out.println("1. Iniciar Sesión");
             System.out.println("2. Registrarse");
-            System.out.println("3. Ver lista de usuarios");
-            System.out.println("4. Salir");
+            System.out.println("3. Salir");
             System.out.print("Seleccione una opción: ");
+            // Input usuario
             int opcion = teclado.nextInt();
             switch (opcion) {
                 case 1:
@@ -54,7 +63,7 @@ public class Main {
                                             }
                                             switch (respuesta) {
                                                 case "articulo":
-                                                    System.out.print("Nombre: ");
+                                                    System.out.print("\nNombre: ");
                                                     String nombreArticulo = teclado.next();
                                                     System.out.print("Descripcion: ");
                                                     String descripcionArticulo = teclado.next();
@@ -88,10 +97,60 @@ public class Main {
                                                     System.out.println("Artículo creado exitosamente:\n" + articulo);
                                                     break;
                                                 case "video":
-                                                    // Lógica para crear un video
+                                                    System.out.print("\nNombre: ");
+                                                    String nombreVideo = teclado.next();
+                                                    System.out.print("Descripcion: ");
+                                                    String descripcionVideo = teclado.next();
+                                                    System.out.print("Etiqueta: ");
+                                                    ArrayList<String> etiquetasVideos = new ArrayList<>();
+                                                    String etiqueta1 = teclado.next();
+                                                    etiquetasVideos.add(etiqueta1);
+                                                    System.out.println("¿Desea agregar más etiquetas? (si/no)");
+                                                    String etiquetasRespuesta1 = teclado.next().toLowerCase().trim();
+                                                    while (etiquetasRespuesta1.equalsIgnoreCase("si")) {
+                                                        System.out.print("Etiqueta: ");
+                                                        String nuevaEtiqueta1 = teclado.next();
+                                                        // Agregar etiqueta al arrayList de etiquetas
+                                                        etiquetasVideos.add(nuevaEtiqueta1);
+                                                        System.out.println("¿Desea agregar más etiquetas? (si/no)");
+                                                        etiquetasRespuesta1 = teclado.next().toLowerCase().trim();
+                                                    }
+                                                    System.out.print("Categoría: ");
+                                                    String categoriaVideo = teclado.next();
+                                                    System.out.print("Duración del video: ");
+                                                    String duracionVideo = teclado.next();
+                                                    // Crear el video
+                                                    Video video = new Video(nombreVideo, descripcionVideo, etiquetasVideos, categoriaVideo, duracionVideo);
+                                                    controlador.agregarContenido(video);
+                                                    System.out.println("Video creado exitosamente:\n" + video);
                                                     break;
                                                 case "imagen":
-                                                    // Lógica para crear una imagen
+                                                    System.out.print("\nNombre: ");
+                                                    String nombreImagen = teclado.next();
+                                                    System.out.print("Descripcion: ");
+                                                    String descripcionImagen = teclado.next();
+                                                    System.out.print("Etiqueta: ");
+                                                    ArrayList<String> etiquetasImagenes = new ArrayList<>();
+                                                    String etiqueta2 = teclado.next();
+                                                    etiquetasImagenes.add(etiqueta2);
+                                                    System.out.println("¿Desea agregar más etiquetas? (si/no)");
+                                                    String etiquetasRespuesta2 = teclado.next().toLowerCase().trim();
+                                                    while (etiquetasRespuesta2.equalsIgnoreCase("si")) {
+                                                        System.out.print("Etiqueta: ");
+                                                        String nuevaEtiqueta2 = teclado.next();
+                                                        // Agregar etiqueta al arrayList de etiquetas
+                                                        etiquetasImagenes.add(nuevaEtiqueta2);
+                                                        System.out.println("¿Desea agregar más etiquetas? (si/no)");
+                                                        etiquetasRespuesta2 = teclado.next().toLowerCase().trim();
+                                                    }
+                                                    System.out.print("Categoría: ");
+                                                    String categoriaImagen = teclado.next();
+                                                    System.out.print("Duración de la imagen: ");
+                                                    String duracionImagen = teclado.next();
+                                                    // Crear la imagen
+                                                    Imagen imagen = new Imagen(nombreImagen, descripcionImagen, etiquetasImagenes, categoriaImagen, duracionImagen);
+                                                    controlador.agregarContenido(imagen);
+                                                    System.out.println("Imagen creada exitosamente:\n" + imagen);
                                                     break;
                                             }
                                             break;
@@ -122,7 +181,7 @@ public class Main {
                             } else {
                                 System.out.println("Contraseña incorrecta. Intente de nuevo.");
                             }
-                            break; // user handled (found or password wrong) -> exit loop
+                            break;
                         }
                     }
                     if (!found) {
@@ -148,12 +207,6 @@ public class Main {
                     controlador.agregarUsuario(nuevoUsuario);
                     break;
                 case 3:
-                    System.out.println("\nLista de Usuarios Registrados:");
-                    for (Usuario u : controlador.getUsuarios()) {
-                        System.out.println(u);
-                    }
-                    break;
-                case 4:
                     System.out.println("Saliendo del programa...");
                     key = 1; // Salir del bucle para terminar el programa
                     break;
