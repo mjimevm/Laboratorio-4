@@ -7,6 +7,7 @@
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Main {
@@ -137,13 +138,14 @@ public class Main {
                                                     }
                                                     System.out.print("Categoría: ");
                                                     String categoriaVideo = teclado.next();
-                                                    System.out.print("Duración del video (HH:MM): ");
-                                                    LocalTime duracionVideo = LocalTime.parse(teclado.next());
+                                                    System.out.print("Duración del video (HH:mm:ss): ");
+                                                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+                                                    LocalTime duracionVideo = LocalTime.parse(teclado.next(), formatter);
                                                     try {
-                                                        duracionVideo = LocalTime.parse(teclado.next());
+                                                        duracionVideo = LocalTime.parse(teclado.next(), formatter);
                                                     } catch (Exception e) {
-                                                        System.out.println("Formato de duración inválido. Por favor, use el formato HH:MM.");
-                                                        continue;
+                                                        System.out.println("Duración inválida. Por favor, ingrese la duración en formato HH:mm:ss:");
+                                                        duracionVideo = LocalTime.parse(teclado.next(), formatter);
                                                     }
                                                     // Crear el video
                                                     Video video = new Video(nombreVideo, descripcionVideo, etiquetasVideos, categoriaVideo, duracionVideo);
