@@ -51,7 +51,7 @@ public class Articulo extends Contenido implements Publicable {
 
     @Override
     public String toString() {
-        return super.toString() + ", Autor: " + autor + ", Fecha de Publicación: " + fechaPublicacion + ", Hora de Publicación: " + horaPublicacion + ", Resumen: " + resumen + "]";
+        return super.toString() + ", Autor: " + autor + ", Fecha de Publicación: " + fechaPublicacion + ", Hora de Publicación: " + horaPublicacion + ", Resumen: " + resumen + ", Publicado: " + publicado + "]";
     }
 
 }

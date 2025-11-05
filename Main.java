@@ -37,6 +37,7 @@ public class Main {
                             String password = teclado.next();
                             if (u.getPassword().equals(password)) {
                                 System.out.println("Inicio de sesión exitoso. Bienvenido " + u.getUsername() + "!");
+                                controlador.setUsuarioActual(u);
                                 salir = false;
                                 while (!salir) {
                                     System.out.println("\nMenú Principal:");
@@ -145,17 +146,17 @@ public class Main {
                                                     }
                                                     System.out.print("Categoría: ");
                                                     String categoriaImagen = teclado.next();
-                                                    System.out.print("Duración de la imagen: ");
-                                                    String duracionImagen = teclado.next();
+                                                    System.out.print("Resolución de la imagen: ");
+                                                    double resolucionImagen = teclado.nextDouble();
                                                     // Crear la imagen
-                                                    Imagen imagen = new Imagen(nombreImagen, descripcionImagen, etiquetasImagenes, categoriaImagen, duracionImagen);
+                                                    Imagen imagen = new Imagen(nombreImagen, descripcionImagen, etiquetasImagenes, categoriaImagen, resolucionImagen);
                                                     controlador.agregarContenido(imagen);
                                                     System.out.println("Imagen creada exitosamente:\n" + imagen);
                                                     break;
                                             }
                                             break;
                                         case 2:
-System.out.println("\nEDITAR CONTENIDO");
+                                            System.out.println("\nEDITAR CONTENIDO");
                                             System.out.println("Elija el índice del contenido que quiere modificar");
                                             int i = 0;
                                             for (Contenido c : controlador.getMultimedia()) {
@@ -207,10 +208,31 @@ System.out.println("\nEDITAR CONTENIDO");
                                             }
                                             break;
                                         case 4:
-                                            // Lógica para publicar contenido
+                                            if (controlador.getMultimedia().isEmpty()) {
+                                                System.out.println("No hay contenidos para publicar.");
+                                                break;
+                                            }
+                                            System.out.println("\nPUBLICAR CONTENIDO");
+                                            int index = 0;
+                                            System.out.println("Contenidos disponibles:");
+                                            for (Contenido cntnido : controlador.getMultimedia()) {
+                                                System.out.println(index + "-> " + cntnido.getNombre());
+                                                index++;
+                                            }
+                                            int nombreContenido = teclado.nextInt();
+                                            if (nombreContenido >= 0 && nombreContenido < controlador.getMultimedia().size()) {
+                                                String resultado = controlador.publicarContenido();
+                                                System.out.println(resultado);
+                                            } else {
+                                                System.out.println("Índice inválido...");
+                                            }
                                             break;
                                         case 5:
                                             // Lógica para listar contenidos
+                                            if (controlador.getMultimedia().isEmpty()) {
+                                                System.out.println("No hay contenidos disponibles.");
+                                                break;
+                                            }
                                             for (Contenido c : controlador.getMultimedia()) {
                                                 System.out.println(c);
                                             }
@@ -256,6 +278,7 @@ System.out.println("\nEDITAR CONTENIDO");
                     break;
                 case 3:
                     System.out.println("Saliendo del programa...");
+                    controlador.salirSesion();
                     key = 1; // Salir del bucle para terminar el programa
                     break;
                 default:

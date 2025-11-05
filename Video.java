@@ -39,6 +39,6 @@ public class Video extends Contenido implements Publicable {
 
     @Override
     public String toString() {
-        return super.toString() + ", Duración: " + duracion + "]";
+        return super.toString() + ", Duración: " + duracion + ", Publicado: " + publicado + "]";
     }
 }

@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
 public class Imagen extends Contenido implements Publicable {
-    private String resolucion;
+    private double resolucion;
     private boolean publicado;
 
-    public Imagen(String nombre, String descripcion, ArrayList<String> etiquetas, String categoria, String resolucion) {
+    public Imagen(String nombre, String descripcion, ArrayList<String> etiquetas, String categoria, double resolucion) {
         super(nombre, descripcion, etiquetas, categoria);
         this.resolucion = resolucion;
         this.publicado = false;
@@ -33,12 +33,12 @@ public class Imagen extends Contenido implements Publicable {
         return publicado;
     }
 
-    public String getResolucion() {
+    public double getResolucion() {
         return resolucion;
     }
 
     @Override
     public String toString() {
-        return super.toString() + ", Resolución: " + resolucion + "]";
+        return super.toString() + ", Resolución: " + resolucion + " px , Publicado: " + publicado + "]";
     }
 }

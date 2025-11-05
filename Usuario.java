@@ -17,6 +17,30 @@ public class Usuario {
     public int getTipo() {
         return tipo;
     }
+    
+    public boolean esAdmin() {
+        return tipo == 1;
+    }
+
+    public boolean puedePublicar () {
+        return tipo == 1;
+    }
+
+    public boolean puedeEliminar () {
+        return tipo == 1;
+    }
+
+    public boolean esEditor() {
+        return tipo == 2;
+    }
+
+    public boolean puedeEditar () {
+        return tipo == 2;
+    }
+
+    public boolean puedeCrear() {
+        return tipo == 2;
+    }
 
     @Override
     public String toString() {

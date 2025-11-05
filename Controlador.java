@@ -3,10 +3,12 @@ import java.util.ArrayList;
 public class Controlador {
     private ArrayList<Contenido> multimedia;
     private ArrayList<Usuario> usuarios;
+    private Usuario usuarioActual;
 
     public Controlador() {
         multimedia = new ArrayList<>();
         usuarios = new ArrayList<>();
+        usuarioActual = null;
     }
     public void agregarContenido(Contenido contenido) {
         multimedia.add(contenido);
@@ -19,6 +21,12 @@ public class Controlador {
     }
     public ArrayList<Usuario> getUsuarios() {
         return usuarios;
+    }
+    public Usuario getUsuarioActual() {
+        return usuarioActual;
+    }
+    public void setUsuarioActual(Usuario usuarioActual) {
+        this.usuarioActual = usuarioActual;
     }
     public void editarContenido(Contenido c,int opcion, String modificacion) {
         if (opcion == 1) {
@@ -35,12 +43,41 @@ public class Controlador {
             // Editar categoria
             c.setCategoria(modificacion);
         }
+        if (usuarioActual.puedeCrear()) {
+            for (Contenido contenido : multimedia) {
+                if (contenido == c) {
+                    if (c instanceof Publicable) {
+                        ((Publicable) c).despublicar();
+                    }
+                    return;
+                }
+            }
+        }
     }
     public String eliminarContenido(int indice) {
         if (indice >= 0 && indice < multimedia.size()) {
             Contenido eliminado = multimedia.remove(indice);
-            return "Contenido eliminado: " + eliminado.getNombre();
+            for (Contenido c : multimedia) {
+                if (c instanceof Publicable) {
+                    ((Publicable) c).despublicar();
+                }
+            }
+            return "Contenido eliminado: " + eliminado;
         }
         return "Índice inválido. No se pudo eliminar el contenido.";
+    }
+    public String publicarContenido() {
+        if (usuarioActual.puedePublicar()) {
+            for (Contenido c : multimedia) {
+                if (c instanceof Publicable) {
+                    ((Publicable) c).publicar();
+                }
+            }
+            return "Contenido publicado exitosamente por: " + usuarioActual.getUsername();
+        }
+        return "El usuario actual no tiene permisos para publicar contenido.";
+    }
+    public void salirSesion() {
+        usuarioActual = null;
     }
 }
