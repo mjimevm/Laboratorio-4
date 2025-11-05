@@ -1,13 +1,15 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Articulo extends Contenido implements Publicable {
     private String autor;
-    private String fechaPublicacion;
-    private String horaPublicacion;
+    private LocalDate fechaPublicacion;
+    private LocalTime horaPublicacion;
     private String resumen;
     private boolean publicado;
 
-    public Articulo(String nombre, String descripcion, ArrayList<String> etiquetas, String categoria, String autor, String fechaPublicacion, String horaPublicacion, String resumen) {
+    public Articulo(String nombre, String descripcion, ArrayList<String> etiquetas, String categoria, String autor, LocalDate fechaPublicacion, LocalTime horaPublicacion, String resumen) {
         super(nombre,  descripcion, etiquetas, categoria);
         this.autor = autor;
         this.fechaPublicacion = fechaPublicacion;
@@ -18,10 +20,10 @@ public class Articulo extends Contenido implements Publicable {
     public String getAutor() {
         return autor;
     }
-    public String getFechaPublicacion() {
+    public LocalDate getFechaPublicacion() {
         return fechaPublicacion;
     }
-    public String getHoraPublicacion() {
+    public LocalTime getHoraPublicacion() {
         return horaPublicacion;
     }
     public String getResumen() {

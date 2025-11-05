@@ -1,16 +1,17 @@
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Video extends Contenido implements Publicable {
-    private String duracion;
+    private LocalTime duracion;
     private boolean publicado;
 
-    public Video(String nombre, String descripcion, ArrayList<String> etiquetas, String categoria, String duracion) {
+    public Video(String nombre, String descripcion, ArrayList<String> etiquetas, String categoria, LocalTime duracion) {
         super(nombre, descripcion, etiquetas, categoria);
         this.duracion = duracion;
         this.publicado = false;
     }
 
-    public String getDuracion() {
+    public LocalTime getDuracion() {
         return duracion;
     }
 

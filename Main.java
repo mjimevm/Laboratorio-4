@@ -5,7 +5,8 @@
 
 // Laboratorio 4
 
-
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Main {
@@ -49,6 +50,12 @@ public class Main {
                                     System.out.println("6. Salir");
                                     System.out.print("Seleccione una opción: ");
                                     int opc = teclado.nextInt();
+                                    try {
+                                        opc = Integer.parseInt(String.valueOf(opc));
+                                    } catch (Exception e) {
+                                        System.out.println("Entrada inválida. Por favor, ingrese un número.");
+                                        continue;
+                                    }
                                     switch (opc) {
                                         case 1:
                                             if (u.getTipo() == 1) {
@@ -87,9 +94,21 @@ public class Main {
                                                     System.out.print("Autor del artículo: ");
                                                     String autorArticulo = teclado.next();
                                                     System.out.print("Fecha Publicación: ");
-                                                    String fechaPublicacion = teclado.next();
+                                                    LocalDate fechaPublicacion = LocalDate.parse(teclado.next());
+                                                    try {
+                                                        fechaPublicacion = LocalDate.parse(teclado.next());
+                                                    } catch (Exception e) {
+                                                        System.out.println("Fecha inválida. Por favor, ingrese la fecha en formato YYYY-MM-DD:");
+                                                        fechaPublicacion = LocalDate.parse(teclado.next());
+                                                    }
                                                     System.out.print("Hora de Publicación: ");
-                                                    String horaPublicacion = teclado.next();
+                                                    LocalTime horaPublicacion = LocalTime.parse(teclado.next());
+                                                    try {
+                                                        horaPublicacion = LocalTime.parse(teclado.next());
+                                                    } catch (Exception e) {
+                                                        System.out.println("Hora inválida. Por favor, ingrese la hora en formato HH:MM:");
+                                                        horaPublicacion = LocalTime.parse(teclado.next());
+                                                    }
                                                     System.out.print("Resumen: ");
                                                     String resumen = teclado.next();
                                                     // Crear el artículo
@@ -118,8 +137,14 @@ public class Main {
                                                     }
                                                     System.out.print("Categoría: ");
                                                     String categoriaVideo = teclado.next();
-                                                    System.out.print("Duración del video: ");
-                                                    String duracionVideo = teclado.next();
+                                                    System.out.print("Duración del video (HH:MM): ");
+                                                    LocalTime duracionVideo = LocalTime.parse(teclado.next());
+                                                    try {
+                                                        duracionVideo = LocalTime.parse(teclado.next());
+                                                    } catch (Exception e) {
+                                                        System.out.println("Formato de duración inválido. Por favor, use el formato HH:MM.");
+                                                        continue;
+                                                    }
                                                     // Crear el video
                                                     Video video = new Video(nombreVideo, descripcionVideo, etiquetasVideos, categoriaVideo, duracionVideo);
                                                     controlador.agregarContenido(video);
