@@ -15,7 +15,9 @@ public class Main {
         Controlador controlador = new Controlador();
         Scanner teclado = new Scanner(System.in);
 
+        // "Llave" para el bucle principal
         int key = 0;
+        // Si es true, el usuario sale al menú principal
         boolean salir = false;
 
         while (key == 0) {
@@ -29,6 +31,8 @@ public class Main {
             int opcion = teclado.nextInt();
             switch (opcion) {
                 case 1:
+                // Iniciar sesión
+                // Ingresar Usuario
                     System.out.print("\nUsuario: ");
                     String usuario = teclado.next();
                     boolean found = false;
@@ -37,6 +41,7 @@ public class Main {
                             found = true;
                             System.out.print("Contraseña: ");
                             String password = teclado.next();
+                            // Si el usuario existe, se procede a ingresar la contraseña; de lo contrario, sale al menu principal
                             if (u.getPassword().equals(password)) {
                                 System.out.println("Inicio de sesión exitoso. Bienvenido " + u.getUsername() + "!");
                                 controlador.setUsuarioActual(u);
@@ -182,6 +187,7 @@ public class Main {
                                                     break;
                                             }
                                             break;
+                                        // Editar contenido
                                         case 2:
                                             System.out.println("\nEDITAR CONTENIDO");
                                             System.out.println("Elija el índice del contenido que quiere modificar");
@@ -214,6 +220,7 @@ public class Main {
                                                 break;
                                             }
                                             break;
+                                        // Eliminar contenido
                                         case 3:
                                             if (controlador.getMultimedia().isEmpty()) {
                                                 System.out.println("No hay contenidos para eliminar.");
@@ -234,6 +241,7 @@ public class Main {
                                                 System.out.println("Índice inválido...");
                                             }
                                             break;
+                                        // Publicar contenido
                                         case 4:
                                             if (controlador.getMultimedia().isEmpty()) {
                                                 System.out.println("No hay contenidos para publicar.");
@@ -254,8 +262,8 @@ public class Main {
                                                 System.out.println("Índice inválido...");
                                             }
                                             break;
+                                        // Listar contenidos
                                         case 5:
-                                            // Lógica para listar contenidos
                                             if (controlador.getMultimedia().isEmpty()) {
                                                 System.out.println("No hay contenidos disponibles.");
                                                 break;
